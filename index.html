@@ -1,1 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISPRO | Consultoría Industrial y Seguridad de Procesos</title>
+    <!-- Librería de iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #031525; /* Fondo azul oscuro tipo corporativo/industrial */
+            /* Efecto de cuadrícula tipo plano DTI/Blueprint pero en tonos azules */
+            background-image: 
+                linear-gradient(rgba(0, 168, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* HEADER / BANNER OFFSHORE */
+        .banner {
+            width: 100%;
+            height: 450px;
+            background-image: url('Portada_Cispro.jpg'); /* Carga aquí tu imagen de portada */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            border-bottom: 4px solid #00a8ff; /* Acento azul eléctrico */
+        }
+        
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(3,21,37,0.3) 0%, rgba(3,21,37,0.9) 100%);
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .main-container {
+            max-width: 900px;
+            margin: -150px auto 50px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* SECCIÓN DE PERFIL */
+        .profile-section {
+            background: rgba(13, 31, 56, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            border-top: 4px solid #00a8ff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            margin-bottom: 30px;
+        }
+
+        .perfil {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #00a8ff;
+            background: #ffffff; /* Fondo blanco para que luzca bien el logo PNG */
+            margin-top: -110px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(0, 168, 255, 0.3);
+            position: relative;
+            z-index: 20;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .job-title {
+            color: #00a8ff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .job-title span {
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 400;
+            display: block;
+            margin-top: 5px;
+        }
+
+        p.description {
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 14px;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        /* MENÚ DESPLEGABLE TIPO ACCORDION */
+        .dropdown-menu {
+            background: #0d1f38;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 168, 255, 0.4);
+            overflow: hidden;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .dropdown-menu summary {
+            background: linear-gradient(90deg, #0d1f38 0%, #15325c 100%);
+            color: #00a8ff;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+
+        .dropdown-menu summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dropdown-menu summary:hover {
+            background: #15325c;
+        }
+
+        .dropdown-content {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            background: #081220;
+            border-top: 1px solid rgba(0, 168, 255, 0.2);
+        }
+
+        /* BOTONES INTERNOS */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            background: #0d1f38;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .btn i {
+            font-size: 18px;
+            color: #00a8ff;
+            width: 20px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #15325c;
+            border-left: 4px solid #00a8ff;
+            transform: translateX(5px);
+        }
+
+        /* CONSOLA DE SERVICIOS TÉCNICOS */
+        .tech-console {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-card {
+            background: linear-gradient(145deg, #0a1628, #112542);
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-align: center;
+        }
+
+        .tech-card:hover {
+            border-color: #00a8ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.2);
+            background: #15325c;
+        }
+
+        .tech-card i {
+            font-size: 20px;
+            color: #00a8ff;
+        }
+
+        .tech-card span {
+            font-size: 11px;
+            font-weight: bold;
+            color: #e2e8f0;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .banner { height: 350px; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }
+            .main-container { margin-top: -100px; }
+            .perfil { width: 140px; height: 140px; margin-top: -90px; }
+            h1 { font-size: 24px; }
+            .tech-console { grid-template-columns: repeat(2, 1fr); }
+            .dropdown-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTADA -->
+    <div class="banner"></div>
+
+    <div class="main-container">
+        
+        <!-- SECCIÓN DE PERFIL -->
+        <div class="profile-section">
+            <img class="perfil" src="LOGO V CISPRO.png" alt="CISPRO Logo">
+            
+            <h1>CISPRO</h1>
+            <div class="job-title">
+                <i class="fas fa-industry"></i> Consultoría y Seguridad de Procesos
+                <span>Ing. Octavio Toledo Racillas | Representante Legal</span>
+            </div>
+            
+            <p class="description">
+                Soluciones técnicas especializadas en seguridad de procesos, ingeniería de proyectos, higiene industrial y consultoría ambiental. Operando bajo metodologías reconocidas (HAZOP, LOPA, IEC-61511) para instalaciones terrestres y costa afuera. Tu aliado estratégico en el sector energético.
+            </p>
+
+            <div class="tech-console">
+                <div class="tech-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>HAZOP / LOPA</span>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Ingeniería</span>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-leaf"></i>
+                    <span>Ambiental / ASEA</span>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-tools"></i>
+                    <span>Integridad Mecánica</span>
+                </div>
+                <div class="tech-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Estudios SIL (SIS)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE CONTACTO Y ENLACES -->
+        <details class="dropdown-menu" open>
+            <summary>
+                <span><i class="fas fa-address-book"></i> Enlaces de Contacto</span>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </summary>
+            <div class="dropdown-content">
+                <a href="mailto:otoledo@cispro.com.mx" class="btn">
+                    <i class="fas fa-envelope"></i>
+                    otoledo@cispro.com.mx
+                </a>
+                <a href="mailto:administracion@cispro.com.mx" class="btn">
+                    <i class="fas fa-envelope-open-text"></i>
+                    administracion@cispro.com.mx
+                </a>
+                <a href="tel:+529381523269" class="btn">
+                    <i class="fas fa-phone-alt"></i>
+                    938 152 3269
+                </a>
+                <a href="http://www.cispro.com.mx" target="_blank" class="btn">
+                    <i class="fas fa-globe"></i>
+                    www.cispro.com.mx
+                </a>
+            </div>
+        </details>
+
+        <!-- SECCIÓN DE EXPERIENCIA -->
+        <details class="dropdown-menu">
+            <summary>
+                <span><i class="fas fa-briefcase"></i> Proyectos y Experiencia</span>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </summary>
+            <div class="dropdown-content">
+                <div class="btn" style="cursor: default;">
+                    <i class="fas fa-oil-can"></i>
+                    <span>Campo ZAMA (HAZOP y SIL)</span>
+                </div>
+                <div class="btn" style="cursor: default;">
+                    <i class="fas fa-water"></i>
+                    <span>Plataformas Marinas (ELM, EMTR)</span>
+                </div>
+                <div class="btn" style="cursor: default;">
+                    <i class="fas fa-gas-pump"></i>
+                    <span>Ductos y Compresión (Ixachi)</span>
+                </div>
+            </div>
+        </details>
+    </div>
+
+</body>
+</html>
