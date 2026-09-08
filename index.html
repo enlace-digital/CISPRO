@@ -16,12 +16,15 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #031525; /* Fondo azul oscuro tipo corporativo/industrial */
-            /* Efecto de cuadrícula tipo plano DTI/Blueprint pero en tonos azules */
-            background-image: 
-                linear-gradient(rgba(0, 168, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
+            /* Diseño único CISPRO: Gradiente oscuro industrial con patrón de líneas diagonales de advertencia muy sutiles */
+            background: linear-gradient(135deg, #020b14 0%, #0a192f 50%, #031525 100%);
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(0, 168, 255, 0.02) 0px,
+                rgba(0, 168, 255, 0.02) 2px,
+                transparent 2px,
+                transparent 10px
+            );
             color: #e2e8f0;
             overflow-x: hidden;
         }
@@ -30,13 +33,13 @@
         .banner {
             width: 100%;
             height: 450px;
-            background-image: url('LOGO V CISPRO.png'); /* Carga aquí tu imagen de portada */
+            background-image: url('LOGO V CISPRO.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             position: relative;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            border-bottom: 4px solid #00a8ff; /* Acento azul eléctrico */
+            border-bottom: 4px solid #00a8ff; 
         }
         
         .banner::after {
@@ -68,18 +71,21 @@
             margin-bottom: 30px;
         }
 
+        /* Modificación de la foto principal para logos horizontales */
         .perfil {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #00a8ff;
-            background: #ffffff; /* Fondo blanco para que luzca bien el logo PNG */
+            width: 300px; /* Ancho ampliado para que el logo se vea completo */
+            height: auto;
+            min-height: 100px;
+            border-radius: 8px; /* Cambiado a rectángulo con bordes suaves */
+            object-fit: contain; /* Asegura que la imagen no se recorte */
+            border: 2px solid #00a8ff;
+            background: #ffffff; 
             margin-top: -110px;
             margin-bottom: 20px;
-            box-shadow: 0 0 25px rgba(0, 168, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.2);
             position: relative;
             z-index: 20;
+            padding: 15px; /* Espacio interno para que el logo respire */
         }
 
         h1 {
@@ -112,6 +118,44 @@
             font-size: 14px;
             max-width: 700px;
             margin: 20px auto;
+        }
+
+        /* GRID DE VALORES CORPORATIVOS (Reemplaza a los cuadritos anteriores) */
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .valor-card {
+            background: linear-gradient(145deg, #0a1628, #112542);
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .valor-card:hover {
+            border-color: #00a8ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.2);
+        }
+
+        .valor-card h3 {
+            font-size: 16px;
+            color: #00a8ff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .valor-card p {
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.5;
         }
 
         /* MENÚ DESPLEGABLE TIPO ACCORDION */
@@ -185,54 +229,30 @@
             transform: translateX(5px);
         }
 
-        /* CONSOLA DE SERVICIOS TÉCNICOS */
-        .tech-console {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .tech-card {
-            background: linear-gradient(145deg, #0a1628, #112542);
-            border: 1px solid rgba(0, 168, 255, 0.2);
-            padding: 12px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+        /* Clases específicas para texto de proyectos */
+        .proyecto-texto {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             gap: 5px;
-            text-align: center;
         }
 
-        .tech-card:hover {
-            border-color: #00a8ff;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.2);
-            background: #15325c;
-        }
-
-        .tech-card i {
-            font-size: 20px;
+        .proyecto-texto span.titulo {
             color: #00a8ff;
+            font-weight: bold;
         }
 
-        .tech-card span {
-            font-size: 11px;
-            font-weight: bold;
-            color: #e2e8f0;
-            letter-spacing: 1px;
+        .proyecto-texto span.desc {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: normal;
         }
 
         @media (max-width: 768px) {
             .banner { height: 350px; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }
             .main-container { margin-top: -100px; }
-            .perfil { width: 140px; height: 140px; margin-top: -90px; }
+            .perfil { width: 220px; margin-top: -80px; }
             h1 { font-size: 24px; }
-            .tech-console { grid-template-columns: repeat(2, 1fr); }
-            .dropdown-content { grid-template-columns: 1fr; }
+            .dropdown-content, .valores-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -257,26 +277,27 @@
                 Soluciones técnicas especializadas en seguridad de procesos, ingeniería de proyectos, higiene industrial y consultoría ambiental. Operando bajo metodologías reconocidas (HAZOP, LOPA, IEC-61511) para instalaciones terrestres y costa afuera. Tu aliado estratégico en el sector energético.
             </p>
 
-            <div class="tech-console">
-                <div class="tech-card">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>HAZOP / LOPA</span>
+            <!-- VALORES CISPRO (Reemplaza la consola técnica) -->
+            <div class="valores-grid">
+                <div class="valor-card">
+                    <h3><i class="fas fa-lightbulb"></i> Innovación</h3>
+                    <!-- SUSTITUYE EL TEXTO DE ABAJO POR EL DE LA PÁGINA WEB -->
+                    <p>Pega aquí la descripción exacta de Innovación que viene en la web de CISPRO.</p>
                 </div>
-                <div class="tech-card">
-                    <i class="fas fa-project-diagram"></i>
-                    <span>Ingeniería</span>
+                <div class="valor-card">
+                    <h3><i class="fas fa-hard-hat"></i> Seguridad</h3>
+                    <!-- SUSTITUYE EL TEXTO DE ABAJO POR EL DE LA PÁGINA WEB -->
+                    <p>Pega aquí la descripción exacta de Seguridad que viene en la web de CISPRO.</p>
                 </div>
-                <div class="tech-card">
-                    <i class="fas fa-leaf"></i>
-                    <span>Ambiental / ASEA</span>
+                <div class="valor-card">
+                    <h3><i class="fas fa-balance-scale"></i> Responsabilidad</h3>
+                    <!-- SUSTITUYE EL TEXTO DE ABAJO POR EL DE LA PÁGINA WEB -->
+                    <p>Pega aquí la descripción exacta de Responsabilidad que viene en la web de CISPRO.</p>
                 </div>
-                <div class="tech-card">
-                    <i class="fas fa-tools"></i>
-                    <span>Integridad Mecánica</span>
-                </div>
-                <div class="tech-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Estudios SIL (SIS)</span>
+                <div class="valor-card">
+                    <h3><i class="fas fa-handshake"></i> Compromiso</h3>
+                    <!-- SUSTITUYE EL TEXTO DE ABAJO POR EL DE LA PÁGINA WEB -->
+                    <p>Pega aquí la descripción exacta de Compromiso que viene en la web de CISPRO.</p>
                 </div>
             </div>
         </div>
@@ -296,8 +317,9 @@
                     <i class="fas fa-envelope-open-text"></i>
                     administracion@cispro.com.mx
                 </a>
-                <a href="tel:+529381523269" class="btn">
-                    <i class="fas fa-phone-alt"></i>
+                <!-- Enlace modificado a WhatsApp con el formato de API de WA y el icono correcto -->
+                <a href="https://wa.me/5219381523269" target="_blank" class="btn">
+                    <i class="fab fa-whatsapp"></i>
                     938 152 3269
                 </a>
                 <a href="http://www.cispro.com.mx" target="_blank" class="btn">
@@ -307,24 +329,34 @@
             </div>
         </details>
 
-        <!-- SECCIÓN DE EXPERIENCIA -->
+        <!-- SECCIÓN DE SERVICIOS Y EXPERIENCIA -->
         <details class="dropdown-menu">
             <summary>
                 <span><i class="fas fa-briefcase"></i> Proyectos y Experiencia</span>
                 <i class="fas fa-chevron-down toggle-icon"></i>
             </summary>
             <div class="dropdown-content">
+                <!-- SUSTITUYE ESTOS BLOQUES POR LOS PROYECTOS EXACTOS DE LA PÁGINA WEB -->
                 <div class="btn" style="cursor: default;">
-                    <i class="fas fa-oil-can"></i>
-                    <span>Campo ZAMA (HAZOP y SIL)</span>
+                    <i class="fas fa-check-circle"></i>
+                    <div class="proyecto-texto">
+                        <span class="titulo">Servicio / Proyecto 1</span>
+                        <span class="desc">Pega aquí la descripción o nombre exacto de la página web.</span>
+                    </div>
                 </div>
                 <div class="btn" style="cursor: default;">
-                    <i class="fas fa-water"></i>
-                    <span>Plataformas Marinas (ELM, EMTR)</span>
+                    <i class="fas fa-check-circle"></i>
+                    <div class="proyecto-texto">
+                        <span class="titulo">Servicio / Proyecto 2</span>
+                        <span class="desc">Pega aquí la descripción o nombre exacto de la página web.</span>
+                    </div>
                 </div>
                 <div class="btn" style="cursor: default;">
-                    <i class="fas fa-gas-pump"></i>
-                    <span>Ductos y Compresión (Ixachi)</span>
+                    <i class="fas fa-check-circle"></i>
+                    <div class="proyecto-texto">
+                        <span class="titulo">Servicio / Proyecto 3</span>
+                        <span class="desc">Pega aquí la descripción o nombre exacto de la página web.</span>
+                    </div>
                 </div>
             </div>
         </details>
