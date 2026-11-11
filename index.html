@@ -8,7 +8,6 @@
 <title>CISPRO | Consultoría Industrial y Seguridad de Procesos</title>
 
 <style>
-/* COLORES Y ESTILOS GENERALES */
 :root {
     --fondo: #081727;
     --panel: #102337;
@@ -33,17 +32,9 @@ body {
     font: 16px/1.65 "Segoe UI", Tahoma, sans-serif;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
+a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
-
-button {
-    color: inherit;
-    cursor: pointer;
-}
+button { color: inherit; cursor: pointer; }
 
 button, a, summary {
     touch-action: manipulation;
@@ -114,6 +105,18 @@ p { color: var(--secundario); }
 .solo-js { display: none; }
 .js .solo-js { display: inline-flex; }
 [hidden] { display: none !important; }
+
+/* ICONOS */
+.icono {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
 /* NAVEGACIÓN */
 .salto {
@@ -408,6 +411,21 @@ summary::-webkit-details-marker { display: none; }
     background: var(--panel);
 }
 
+.contacto > .icono {
+    width: 30px;
+    height: 30px;
+    color: var(--azul);
+}
+
+.contacto[data-contacto="whatsapp"] > .icono {
+    color: #25d366;
+}
+
+.contacto > span:not(.flecha) {
+    flex: 1;
+    min-width: 0;
+}
+
 .contacto strong {
     display: block;
     font-size: 15px;
@@ -469,6 +487,7 @@ dialog p { white-space: pre-line; }
 .cerrar {
     width: 44px;
     height: 44px;
+    flex-shrink: 0;
     border: 1px solid var(--borde);
     border-radius: 50%;
     background: transparent;
@@ -477,6 +496,28 @@ dialog p { white-space: pre-line; }
 
 .cerrar:hover { background: #274259; }
 body.ventana-abierta { overflow: hidden; }
+
+#ventana-nosotros {
+    width: min(1000px, calc(100% - 24px));
+    padding: 20px;
+}
+
+#ventana-nosotros .ventana-cabecera {
+    position: sticky;
+    top: -20px;
+    background: var(--panel);
+    padding: 8px 0;
+}
+
+#nosotros-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 16px;
+    border-radius: 8px;
+}
+
+#nosotros-estado { margin-top: 16px; }
 
 #enlace-compartir {
     width: 100%;
@@ -540,11 +581,16 @@ body.ventana-abierta { overflow: hidden; }
 
 /* CELULAR */
 @media (max-width: 560px) {
+    html { scroll-padding-top: 120px; }
+
     .contenedor { width: calc(100% - 36px); }
 
     .navegacion {
         min-height: 64px;
-        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 0;
     }
 
     .marca {
@@ -552,9 +598,14 @@ body.ventana-abierta { overflow: hidden; }
         letter-spacing: 2px;
     }
 
-    nav { gap: 14px; }
+    nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+    }
+
     nav a { font-size: 11px; }
-    .nav-contacto { display: none; }
     .portada-contenido { padding: 38px 0; }
     h1 { font-size: 68px; }
     .descripcion { font-size: 14px; }
@@ -612,6 +663,41 @@ body.ventana-abierta { overflow: hidden; }
 </head>
 
 <body>
+
+<!-- ICONOS INTEGRADOS: NO REQUIEREN LIBRERÍAS EXTERNAS -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="0" height="0" aria-hidden="true"
+     style="position:absolute;overflow:hidden">
+    <defs>
+        <symbol id="icono-correo" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="m3 6 9 7 9-7"/>
+        </symbol>
+
+        <symbol id="icono-web" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <ellipse cx="12" cy="12" rx="4" ry="9"/>
+            <path d="M3 12h18M5 6h14M5 18h14"/>
+        </symbol>
+
+        <symbol id="icono-whatsapp" viewBox="0 0 24 24">
+            <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3 20.5l1.3-4.8a8.5 8.5 0 1 1 16.2-4Z"/>
+            <path d="m8.2 7.1 1.5 2.6-1 1.2c.9 1.7 2 2.8 3.8 3.6l1.2-1 2.6 1.4c.1 1.3-.8 2.1-2 2.1-3.7-.2-7.9-4.4-8-7.9 0-1.2.8-2.1 1.9-2Z"/>
+        </symbol>
+
+        <symbol id="icono-guardar" viewBox="0 0 24 24">
+            <path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/>
+        </symbol>
+
+        <symbol id="icono-compartir" viewBox="0 0 24 24">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <path d="m9 10 6-3m-6 7 6 3"/>
+        </symbol>
+    </defs>
+</svg>
+
 <a class="salto" href="#principal">Ir al contenido</a>
 
 <!-- NAVEGACIÓN -->
@@ -622,9 +708,13 @@ body.ventana-abierta { overflow: hidden; }
         </a>
 
         <nav aria-label="Navegación principal">
+            <a id="abrir-nosotros"
+               href="Quienes%20somos%20CISPRO.jpg"
+               aria-haspopup="dialog"
+               aria-controls="ventana-nosotros">¿Quiénes somos?</a>
             <a href="#servicios">Servicios</a>
             <a href="#documentos">Documentos</a>
-            <a class="nav-contacto" href="#contacto">Contacto</a>
+            <a href="#contacto">Contacto</a>
         </nav>
     </div>
 </header>
@@ -662,13 +752,8 @@ body.ventana-abierta { overflow: hidden; }
             </div>
 
             <aside class="accesos" aria-label="Accesos rápidos">
-                <img
-                    id="logo"
-                    class="logo"
-                    alt="CISPRO Logo"
-                    width="300"
-                    height="120"
-                >
+                <img id="logo" class="logo"
+                     alt="CISPRO Logo" width="300" height="120">
 
                 <span class="etiqueta">Conoce CISPRO</span>
 
@@ -688,7 +773,8 @@ body.ventana-abierta { overflow: hidden; }
     </section>
 
     <!-- VALORES CORPORATIVOS -->
-    <section class="seccion contenedor" id="valores" aria-labelledby="titulo-valores">
+    <section class="seccion contenedor" id="valores"
+             aria-labelledby="titulo-valores">
         <div class="titulo-seccion">
             <div>
                 <span class="etiqueta">Nuestra esencia</span>
@@ -721,7 +807,8 @@ body.ventana-abierta { overflow: hidden; }
     </section>
 
     <!-- PROYECTOS Y SERVICIOS -->
-    <section class="seccion contenedor" id="servicios" aria-labelledby="titulo-servicios">
+    <section class="seccion contenedor" id="servicios"
+             aria-labelledby="titulo-servicios">
         <div class="titulo-seccion">
             <div>
                 <span class="etiqueta">Especialidades</span>
@@ -790,7 +877,8 @@ En el complejo entorno industrial actual, la seguridad y el cumplimiento normati
     </section>
 
     <!-- DESCARGAS -->
-    <section class="seccion contenedor" id="documentos" aria-labelledby="titulo-documentos">
+    <section class="seccion contenedor" id="documentos"
+             aria-labelledby="titulo-documentos">
         <div class="titulo-seccion">
             <div>
                 <span class="etiqueta">Información corporativa</span>
@@ -819,7 +907,8 @@ En el complejo entorno industrial actual, la seguridad y el cumplimiento normati
     </section>
 
     <!-- CONTACTO -->
-    <section class="seccion contenedor" id="contacto" aria-labelledby="titulo-contacto">
+    <section class="seccion contenedor" id="contacto"
+             aria-labelledby="titulo-contacto">
         <div class="titulo-seccion">
             <div>
                 <span class="etiqueta">Conversemos</span>
@@ -829,7 +918,12 @@ En el complejo entorno industrial actual, la seguridad y el cumplimiento normati
         </div>
 
         <div class="contactos">
-            <a class="contacto" href="mailto:otoledo@cispro.com.mx" data-contacto="email">
+            <a class="contacto"
+               href="mailto:otoledo@cispro.com.mx"
+               data-contacto="email">
+                <svg class="icono" aria-hidden="true" focusable="false">
+                    <use href="#icono-correo"></use>
+                </svg>
                 <span>
                     <strong>Correo electrónico</strong>
                     <small>otoledo@cispro.com.mx</small>
@@ -837,23 +931,42 @@ En el complejo entorno industrial actual, la seguridad y el cumplimiento normati
                 <span class="flecha" aria-hidden="true">↗</span>
             </a>
 
-            <a class="contacto" href="mailto:administracion@cispro.com.mx" data-contacto="administracion">
+            <a class="contacto"
+               href="mailto:administracion@cispro.com.mx"
+               data-contacto="administracion">
+                <svg class="icono" aria-hidden="true" focusable="false">
+                    <use href="#icono-correo"></use>
+                </svg>
                 <span>
-                    <strong>Correo eletrónico administrativo</strong>
+                    <strong>Correo electrónico administrativo</strong>
                     <small>administracion@cispro.com.mx</small>
                 </span>
                 <span class="flecha" aria-hidden="true">↗</span>
             </a>
 
-            <a class="contacto" href="https://wa.me/5219381523269" target="_blank" rel="noopener noreferrer" data-contacto="whatsapp">
+            <a class="contacto"
+               href="https://wa.me/5219381523269"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-contacto="whatsapp">
+                <svg class="icono" aria-hidden="true" focusable="false">
+                    <use href="#icono-whatsapp"></use>
+                </svg>
                 <span>
-                    <strong>Whatsapp</strong>
+                    <strong>WhatsApp</strong>
                     <small>+52 938 152 3269</small>
                 </span>
                 <span class="flecha" aria-hidden="true">↗</span>
             </a>
 
-            <a class="contacto" href="http://www.cispro.com.mx" target="_blank" rel="noopener noreferrer" data-contacto="web">
+            <a class="contacto"
+               href="http://www.cispro.com.mx"
+               target="_blank"
+               rel="noopener noreferrer"
+               data-contacto="web">
+                <svg class="icono" aria-hidden="true" focusable="false">
+                    <use href="#icono-web"></use>
+                </svg>
                 <span>
                     <strong>Página web</strong>
                     <small>www.cispro.com.mx</small>
@@ -864,10 +977,17 @@ En el complejo entorno industrial actual, la seguridad y el cumplimiento normati
 
         <div class="acciones">
             <button class="boton solo-js" id="guardar-contacto">
-                Guardar contacto ↓
+                <svg class="icono" aria-hidden="true" focusable="false">
+                    <use href="#icono-guardar"></use>
+                </svg>
+                Guardar contacto
             </button>
+
             <button class="boton solo-js" id="compartir">
-                Compartir presentación ↗
+                <svg class="icono" aria-hidden="true" focusable="false">
+                    <use href="#icono-compartir"></use>
+                </svg>
+                Compartir presentación
             </button>
         </div>
     </section>
@@ -881,25 +1001,56 @@ En el complejo entorno industrial actual, la seguridad y el cumplimiento normati
 <!-- ACCESOS FIJOS EN CELULAR -->
 <div class="barra-movil" aria-label="Acciones rápidas">
     <a class="boton" href="#documentos">Documentos ↓</a>
-    <a class="boton primario" href="https://wa.me/5219381523269" target="_blank" rel="noopener noreferrer" data-contacto="whatsapp">
-        Whatsapp ↗
+
+    <a class="boton primario"
+       href="https://wa.me/5219381523269"
+       target="_blank"
+       rel="noopener noreferrer"
+       data-contacto="whatsapp">
+        <svg class="icono" aria-hidden="true" focusable="false">
+            <use href="#icono-whatsapp"></use>
+        </svg>
+        WhatsApp ↗
     </a>
 </div>
+
+<!-- VENTANA QUIÉNES SOMOS -->
+<dialog id="ventana-nosotros" aria-labelledby="nosotros-titulo">
+    <div class="ventana-cabecera">
+        <h2 id="nosotros-titulo">¿Quiénes somos?</h2>
+        <button class="cerrar" data-cerrar
+                aria-label="Cerrar ventana" autofocus>×</button>
+    </div>
+
+    <p id="nosotros-estado" role="status">Cargando imagen…</p>
+
+    <img id="nosotros-imagen"
+         alt="Presentación corporativa: quiénes somos en CISPRO"
+         hidden>
+
+    <div class="acciones">
+        <a class="boton" id="nosotros-original"
+           href="Quienes%20somos%20CiSPRO.jpg"
+           target="_blank" rel="noopener noreferrer">
+            Abrir imagen en tamaño original ↗
+        </a>
+    </div>
+</dialog>
 
 <!-- VENTANA DE SERVICIO -->
 <dialog id="ventana-servicio" aria-labelledby="ventana-titulo">
     <div class="ventana-cabecera">
         <span class="etiqueta">CISPRO / Servicios</span>
-        <button class="cerrar" data-cerrar aria-label="Cerrar ventana" autofocus>
-            ×
-        </button>
+        <button class="cerrar" data-cerrar
+                aria-label="Cerrar ventana" autofocus>×</button>
     </div>
 
     <h2 id="ventana-titulo"></h2>
     <p id="ventana-texto"></p>
 
     <div class="acciones">
-        <a class="boton primario" id="consultar-servicio" target="_blank" rel="noopener noreferrer">
+        <a class="boton primario" id="consultar-servicio"
+           target="_blank" rel="noopener noreferrer">
             Consultar este servicio ↗
         </a>
     </div>
@@ -909,47 +1060,37 @@ En el complejo entorno industrial actual, la seguridad y el cumplimiento normati
 <dialog id="ventana-compartir" aria-labelledby="compartir-titulo">
     <div class="ventana-cabecera">
         <span class="etiqueta">CISPRO</span>
-        <button class="cerrar" data-cerrar aria-label="Cerrar ventana" autofocus>
-            ×
-        </button>
+        <button class="cerrar" data-cerrar
+                aria-label="Cerrar ventana" autofocus>×</button>
     </div>
 
     <h2 id="compartir-titulo">Compartir presentación</h2>
     <p id="compartir-ayuda">Copia el enlace y compártelo con tus contactos.</p>
 
-    <input id="enlace-compartir" readonly aria-label="Enlace de la presentación">
+    <input id="enlace-compartir" readonly
+           aria-label="Enlace de la presentación">
 
     <div class="acciones">
-        <button class="boton primario" id="copiar-enlace">Copiar enlace</button>
+        <button class="boton primario" id="copiar-enlace">
+            Copiar enlace
+        </button>
     </div>
 </dialog>
 
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
 <script>
-/* =========================================================
-   CONFIGURACIÓN GENERAL
+/* CONFIGURACIÓN
+   Las imágenes deben estar junto a index.html.
+   Respeta exactamente sus nombres, mayúsculas y extensiones.
 
-   IMÁGENES:
-   Conserva estos archivos junto a index.html.
-
-   DOCUMENTOS:
-   Primero sube tus PDF a GitHub, dentro de documentos/.
-   Después sustituye null por la ruta entre comillas:
-
-   archivo: "documentos/cv-cispro.pdf"
-   archivo: "documentos/catalogo-servicios.pdf"
-
-   Con archivo: null se muestra "pendiente de incorporación".
-   Los botones Ver PDF y Descargar se crean automáticamente.
-
-   URL PÚBLICA:
-   Puedes dejarla vacía. La página usará su dirección actual.
-   Si la completas, utiliza la URL publicada de GitHub Pages,
-   no el enlace al archivo dentro del repositorio.
-   ========================================================= */
+   Para activar los documentos, sustituye null por sus rutas:
+   "documentos/cv-cispro.pdf"
+   "documentos/catalogo-servicios.pdf"
+*/
 
 const CONFIG = {
+    quienesSomos: "Quienes somos CiSPRO.jpg",
     logo: "Logo_horizontal_1.jpg",
     portada: "LOGO V CISPRO.png",
     urlPublica: "",
@@ -969,14 +1110,8 @@ const CONFIG = {
     },
 
     documentos: [
-        {
-            titulo: "CV corporativo",
-            archivo: null
-        },
-        {
-            titulo: "Catálogo de servicios",
-            archivo: null
-        }
+        { titulo: "CV corporativo", archivo: null },
+        { titulo: "Catálogo de servicios", archivo: null }
     ]
 };
 
@@ -985,7 +1120,6 @@ document.documentElement.classList.add("js");
 
 const seleccionar = selector => document.querySelector(selector);
 const contacto = CONFIG.contacto;
-
 let temporizador;
 
 function avisar(texto) {
@@ -997,7 +1131,7 @@ function avisar(texto) {
     }, 4500);
 }
 
-/* IMÁGENES: NO MUESTRA IMÁGENES ROTAS SI FALTAN */
+/* IMÁGENES */
 function cargarImagen(ruta, alCargar) {
     if (!ruta) return;
 
@@ -1035,7 +1169,7 @@ document.querySelectorAll("[data-contacto]").forEach(enlace => {
     }
 });
 
-/* DOCUMENTOS GENERADOS DESDE CONFIG */
+/* DOCUMENTOS */
 const listaDocumentos = seleccionar("#lista-documentos");
 listaDocumentos.replaceChildren();
 
@@ -1098,7 +1232,7 @@ CONFIG.documentos.forEach(documento => {
     listaDocumentos.append(tarjeta);
 });
 
-/* VENTANAS: CIERRE CON BOTÓN, ESCAPE O CLIC FUERA */
+/* VENTANAS: BOTÓN, ESCAPE O CLIC FUERA */
 function abrirVentana(ventana) {
     ventana.showModal();
     document.body.classList.add("ventana-abierta");
@@ -1128,7 +1262,41 @@ document.querySelectorAll("dialog").forEach(ventana => {
     });
 });
 
-/* SERVICIOS: REUTILIZA EL TEXTO ORIGINAL SIN DUPLICARLO */
+/* QUIÉNES SOMOS */
+const enlaceNosotros = seleccionar("#abrir-nosotros");
+
+enlaceNosotros.href = CONFIG.quienesSomos;
+seleccionar("#nosotros-original").href = CONFIG.quienesSomos;
+
+enlaceNosotros.addEventListener("click", evento => {
+    evento.preventDefault();
+
+    const imagen = seleccionar("#nosotros-imagen");
+    const estado = seleccionar("#nosotros-estado");
+
+    abrirVentana(seleccionar("#ventana-nosotros"));
+
+    if (imagen.complete && imagen.naturalWidth) return;
+
+    imagen.hidden = true;
+    estado.hidden = false;
+    estado.textContent = "Cargando imagen…";
+
+    imagen.onload = () => {
+        imagen.hidden = false;
+        estado.hidden = true;
+    };
+
+    imagen.onerror = () => {
+        imagen.hidden = true;
+        estado.textContent =
+            "No se pudo cargar la imagen. Intenta abrirla con el enlace de abajo.";
+    };
+
+    imagen.src = CONFIG.quienesSomos;
+});
+
+/* AMPLIAR SERVICIOS */
 document.querySelectorAll("[data-ampliar]").forEach(boton => {
     boton.addEventListener("click", () => {
         const servicio = boton.closest(".servicio");
@@ -1150,7 +1318,7 @@ document.querySelectorAll("[data-ampliar]").forEach(boton => {
     });
 });
 
-/* GUARDAR CONTACTO EN FORMATO VCF */
+/* GUARDAR CONTACTO */
 function escaparVCF(texto) {
     return texto
         .replace(/\\/g, "\\\\")
