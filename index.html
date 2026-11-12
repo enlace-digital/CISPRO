@@ -749,7 +749,7 @@ body.ventana-abierta { overflow: hidden; }
 
         <nav aria-label="Navegación principal">
             <a id="abrir-nosotros"
-               href="Resumen%20de%20Experiencia%20Offshore%20de%20CISPRO.png"
+               href="cispro-experiencia-offshore.png"
                aria-haspopup="dialog"
                aria-controls="ventana-nosotros">¿Quiénes somos?</a>
             <a href="#servicios">Servicios</a>
@@ -1051,15 +1051,18 @@ body.ventana-abierta { overflow: hidden; }
                 <span class="pdf">PDF</span>
                 <h3>CV corporativo</h3>
                 <div class="acciones">
-                    <a class="boton" href="CISPRO_Perfil_Con_Logotipos_Clientes.pdf" target="_blank" rel="noopener noreferrer">Ver PDF</a>
-                    <a class="boton primario" href="CISPRO_Perfil_Con_Logotipos_Clientes.pdf" download>Descargar</a>
+                    <a class="boton" href="cispro-cv.pdf" target="_blank" rel="noopener noreferrer">Ver PDF</a>
+                    <a class="boton primario" href="cispro-cv.pdf" download>Descargar</a>
                 </div>
             </article>
 
             <article class="documento">
                 <span class="pdf">PDF</span>
-                <h3>Catálogo de servicios</h3>
-                <p class="pendiente">Documento pendiente de incorporación.</p>
+                <h3>Catálogo comercial</h3>
+                <div class="acciones">
+                    <a class="boton" href="cispro-catalogo.pdf" target="_blank" rel="noopener noreferrer">Ver PDF</a>
+                    <a class="boton primario" href="cispro-catalogo.pdf" download>Descargar</a>
+                </div>
             </article>
         </div>
 
@@ -1171,7 +1174,7 @@ body.ventana-abierta { overflow: hidden; }
 
     <div class="acciones">
         <a class="boton" id="nosotros-original"
-           href="Resumen%20de%20Experiencia%20Offshore%20de%20CISPRO.png"
+           href="cispro-experiencia-offshore.png"
            target="_blank" rel="noopener noreferrer">
             Abrir imagen en tamaño original
         </a>
@@ -1203,15 +1206,14 @@ body.ventana-abierta { overflow: hidden; }
 
 <script>
 /* CONFIGURACIÓN
-   Los archivos locales deben estar junto a index.html.
-   Respeta exactamente sus nombres, mayúsculas y extensiones.
-
-   Para activar los documentos, sustituye null por sus rutas:
-   "documentos/catalogo-servicios.pdf"
+   .github/sync_drive.py vincula los numerales de Drive con estos archivos:
+   1. cispro-cv.pdf
+   2. cispro-experiencia-offshore.png
+   5. cispro-catalogo.pdf
 */
 
 const CONFIG = {
-    quienesSomos: "Resumen de Experiencia Offshore de CISPRO.png",
+    quienesSomos: "cispro-experiencia-offshore.png",
     logo: "Logo_horizontal_1.jpg",
     portada: "LOGO V CISPRO.png",
     urlPublica: "",
@@ -1230,8 +1232,8 @@ const CONFIG = {
     },
 
     documentos: [
-        { titulo: "CV corporativo", archivo: "CISPRO_Perfil_Con_Logotipos_Clientes.pdf" },
-        { titulo: "Catálogo de servicios", archivo: null }
+        { titulo: "CV corporativo", archivo: "cispro-cv.pdf" },
+        { titulo: "Catálogo comercial", archivo: "cispro-catalogo.pdf" }
     ]
 };
 
